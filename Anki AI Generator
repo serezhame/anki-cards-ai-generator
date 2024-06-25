@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+# Set default values
+default_file_path="~/Downloads/input.csv"
+default_level="C1"
+
+# Prompt the user to enter the file path
+read "file_path?Please enter the file path [default: $default_file_path]: "
+# Use default file path if none is provided
+file_path="${file_path:-$default_file_path}"
+# Expand the tilde to the full home directory path
+file_path="${file_path/#\~/$HOME}"
+
+# Check if the file exists
+if [ ! -f "$file_path" ]; then
+  echo "File not found. Please check the file path and try again."
+  exit 1
+fi
+
+# Prompt the user to enter the deck name
+read "deck_name?Please enter the deck name: "
+
+# Check if a deck name is provided
+if [ -z "$deck_name" ]; then
+  echo "No deck name provided. Please enter a valid deck name."
+  exit 1
+fi
+
+# Prompt the user to enter the level
+read "level?Please enter the level [default: $default_level]: "
+# Use default level if none is provided
+level="${level:-$default_level}"
+
+cd ~/Documents/Scripts/anki-cards-ai-generator
+source env/bin/activate
+
+python3 -m generator.read-generate-import --deck_name=$deck_name --level=$level $file_path "~/Downloads/Anki AI Generator Cache"
