@@ -56,7 +56,8 @@ def create_card_for_word(word_with_context) -> CardRawDataV1:
     else:
         logging.warning(f"Dictionary url is not created")
 
-    card_raw: CardRawDataV1 = CardRawDataV1(word=word_with_context.word, card_text=card_text,
+    card_raw: CardRawDataV1 = CardRawDataV1(word=word_with_context.word, translation=word_with_context.translation,
+                                            card_text=card_text,
                                             image_prompt=image_prompt, image_url=image_url, image_path=image_path,
                                             audio_path=audio_path,
                                             dictionary_url=dictionary_url)

@@ -7,17 +7,21 @@ from dataclasses import dataclass, asdict
 class WordWithContext:
     word: str
     context: str
+    translation: str
 
     def __post_init__(self):
-        if self.word is None or self.context is None:
+        if self.word is None or self.context is None or self.translation is None:
             raise ValueError("Attributes cannot be None")
         if self.word == "":
             raise ValueError("Word cannot be empty")
+        if self.translation == "":
+            raise ValueError("Translation cannot be empty")
 
 
 @dataclass(frozen=True)
 class CardRawDataV1:
     word: str
+    translation: str
     card_text: str
     image_prompt: str
     image_url: str
@@ -32,6 +36,8 @@ class CardRawDataV1:
             raise ValueError(f"Attributes cannot be None: {serialize_to_json(self)}")
         if self.word == "":
             raise ValueError("Word cannot be empty")
+        if self.translation == "":
+            raise ValueError("Translation cannot be empty")
         if self.card_text == "":
             raise ValueError("Card text cannot be empty")
         if self.image_url == "":
@@ -60,5 +66,5 @@ def word_to_filename(word: WordWithContext) -> str:
 def cards_to_dict(cards: list[CardRawDataV1]) -> dict[WordWithContext, CardRawDataV1]:
     cards_dict: dict[WordWithContext, CardRawDataV1] = {}
     for card in cards:
-        cards_dict[WordWithContext(card.word, "")] = card
+        cards_dict[WordWithContext(card.word, "", card.translation)] = card
     return cards_dict
