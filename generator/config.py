@@ -33,7 +33,7 @@ class Config:
     DEFAULT_LEVEL: str = C1
     LEVEL: str = None
 
-    DEFAULT_CARD_MODEL: str = "Basic (type in the answer)"
+    DEFAULT_CARD_MODEL: str = "Basic"
     CARD_MODEL: str = None
 
     @classmethod
@@ -132,7 +132,7 @@ class Config:
             cls.ANKI_MEDIA_DIRECTORY = os.path.join(user_profile, 'AppData', 'Roaming', 'Anki2', 'User 1', 'collection.media')
         elif os.name == 'posix':
             home_path = os.path.expanduser('~')
-            cls.ANKI_MEDIA_DIRECTORY = os.path.join(home_path, '.local', 'share', 'Anki2', 'User 1', 'collection.media')
+            cls.ANKI_MEDIA_DIRECTORY = os.path.join(home_path, 'Library', 'Application Support', 'Anki2', 'User 1', 'collection.media')
         else:
             raise EnvironmentError(f"Unknown OS [{os.name}]")
         logging.info(f"Use default anki media directory [{cls.ANKI_MEDIA_DIRECTORY}]")
