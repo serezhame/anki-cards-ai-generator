@@ -112,7 +112,6 @@ def get_back_html(card_data: CardRawDataV1) -> str:
 
     # Add audio if it exists
     if card_data.audio_path:
-        # audio_text = f"<span class='audio-text'>Audio</span>"
         audio_button = f"<span class='audio-button'>[sound:{os.path.basename(card_data.audio_path)}]</span>"
         back_content += f"<div class='audio-container'>{audio_button}</div>"
 
