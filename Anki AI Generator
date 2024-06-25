@@ -1,15 +1,15 @@
 #!/bin/zsh
 
 # Set default values
-default_file_path="~/Downloads/input.csv"
+default_directory="$HOME/Downloads"
+default_file_name="input.csv"
 default_level="C1"
 
-# Prompt the user to enter the file path
-read "file_path?Please enter the file path [default: $default_file_path]: "
-# Use default file path if none is provided
-file_path="${file_path:-$default_file_path}"
-# Expand the tilde to the full home directory path
-file_path="${file_path/#\~/$HOME}"
+# Prompt the user to enter the file name
+read "file_name?Please enter the file name [default: $default_file_name]: "
+# Use default file name if none is provided
+file_name="${file_name:-$default_file_name}"
+file_path="$default_directory/$file_name"
 
 # Check if the file exists
 if [ ! -f "$file_path" ]; then
